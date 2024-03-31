@@ -3,9 +3,8 @@
 
 #include <algorithm>
 
-#include "SubFunctions.h"
-#include "../gauss/gauss.h"
-#include "../iterSystemSolver/iterSystemSolver.h"
+#include "gauss.h"
+#include "iterSystemSolver.h"
 
 // ������� ������� ���������� �������������� ���������
 //

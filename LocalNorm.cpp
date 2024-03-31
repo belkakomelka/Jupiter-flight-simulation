@@ -1,6 +1,5 @@
 #include "LocalNorm.h"
 
-
 double getLocalNorm(std::vector<double>& residuals, const Matrix& A){
     double norm = 0;
     for (int i = 0; i < residuals.size(); i++)

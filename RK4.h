@@ -2,11 +2,11 @@
 #define GAUSS_RK4_H
 
 #include <vector>
-
-#include "../gauss/gauss.h"
+#include "gauss.h"
+#include "Subfunction.h"
 
 void RK4(
-    void (*function)(
+    void (*subfunction)(
         int dimension,
         double x0,
         vector<double> y,

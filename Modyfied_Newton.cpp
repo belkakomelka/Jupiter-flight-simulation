@@ -65,7 +65,7 @@ void newtonModyfied(void (*getResidual)(const vector<double> &, vector<double> &
 
         R1 = 0;
 
-        for (int i = 0; i < dimension; i++) 
+        for (int i =0; i < dimension; i++)
 		{
 			int z;
 			if (fabs(x[i]) < E)

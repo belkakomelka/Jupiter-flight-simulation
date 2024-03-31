@@ -5,8 +5,6 @@
 #include <vector>
 #include <string>
 
-#include "SubFunctions.h"
-
 using std::vector;
 
 typedef vector<vector<double>> Matrix;

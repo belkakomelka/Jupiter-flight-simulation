@@ -1,7 +1,7 @@
 #include "RK4.h"
 
 void RK4(
-    void (*function)(
+    void (*subfunction)(
         int dimension,
         double x0,
         vector<double> y,
@@ -39,7 +39,7 @@ void RK4(
 
     for (int i = 0; i < steps; i++)
 	{
-        function(dimension, x, y, dy, exit_signal, step_counter, result);
+        subfunction(dimension, x, y, dy, exit_signal, step_counter, result);
         if (exit_signal == 1)
             break;
         for (int j = 0; j < dimension; j++) 
@@ -50,21 +50,21 @@ void RK4(
 
         double x1 = x + dx / 2.0;
 
-        function(dimension, x1, y1, dy, exit_signal, step_counter, result);
+        subfunction(dimension, x1, y1, dy, exit_signal, step_counter, result);
         for (int j = 0; j < dimension; j++) 
 		{
             ak2[j] = dx * dy[j];
             y1[j] = y[j] + ak2[j] / 2.0;
         }
 
-        function(dimension, x1, y1, dy, exit_signal, step_counter, result);
+        subfunction(dimension, x1, y1, dy, exit_signal, step_counter, result);
         for (int j = 0; j < dimension; j++) 
 		{
             ak3[j] = dx * dy[j];
             y1[j] = y[j] + ak3[j];
         }
 
-        function(dimension, x + dx, y1, dy, exit_signal, step_counter, result);
+        subfunction(dimension, x + dx, y1, dy, exit_signal, step_counter, result);
 
         result[i + 1][0] = x + dx;
 

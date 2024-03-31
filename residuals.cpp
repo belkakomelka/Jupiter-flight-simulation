@@ -1,8 +1,13 @@
 #include "residuals.h"
+#include <cmath>
 
 void getResidual(const std::vector<double> &x, std::vector<double> &residuals){
-
+    // x - массив неизвестных
+    // residuals - массив невязок
+    //  double theta = atan();
 }
+// вот это вызов рунге кутта
+
 //    void (*function)(
 //        int dimension,
 //        double x0,
