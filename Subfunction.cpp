@@ -88,7 +88,7 @@ void getResidual(const std::vector<double> &x, std::vector<double> &residuals){
     int step_counter = 0;
 
     RK4(subfunction, constants::dimension, constants::iterations, X0, delX, y, exit_signal, step_counter, constants::result);
-
+    residuals.resize(x.size());
     residuals[0] = y[0];
     residuals[1] = (y[1] - constants::V_F) / constants::V_F;
     residuals[2] = (y[2] - constants::R_F) / constants::R_F;

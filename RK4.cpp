@@ -28,7 +28,7 @@ void RK4(
     vector<double> ak4(dimension_rk, 0);
     vector<double> y1(dimension_rk, 0);
 
-    result = Matrix(steps + 1, vector<double>(dimension_rk + 5, 0));
+    //result = Matrix(steps + 1, vector<double>(dimension_rk + 5, 0));
 
     result[0][0] = x;
 

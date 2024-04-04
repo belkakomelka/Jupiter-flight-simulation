@@ -58,7 +58,7 @@ void newtonModyfied(void (*getResidual)(const vector<double> &, vector<double> &
         string error = "";
         LUP(A, LU, T, error);
         if (!error.empty()) 
-			std::cout << "Матрица системы ообенная!" << std::endl;
+			std::cout << "Матрица системы особенная!" << std::endl;
 
         vector<double> dx(B.size(), 0);
         solveSystem(LU, B, T, dx);
