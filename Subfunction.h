@@ -3,12 +3,8 @@
 
 #include <vector>
 #include "gauss.h"
-
-extern double const ALPHA;
-extern double const A_0;
-extern double const R_0;
-extern double t1;
-
+#include "constants.h"
+#include "RK4.h"
 
 void subfunction(
         int dimension,
@@ -18,5 +14,7 @@ void subfunction(
         int& exit_signal,
         unsigned int step_number,
         Matrix& result);
+
+void getResidual(const std::vector<double> &x, std::vector<double> &residual);
 
 #endif
