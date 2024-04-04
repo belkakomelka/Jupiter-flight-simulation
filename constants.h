@@ -1,26 +1,28 @@
 #ifndef JUPITER_FLIGHT_SIMULATION_CONSTANTS_H
 #define JUPITER_FLIGHT_SIMULATION_CONSTANTS_H
+#pragma once
+
+#include <vector>
 
 namespace constants{
-    double const FiZ = 0; // полярный полярный угол Земли
-    double const R_0 = 149600000; // радиус орбиты Земли
-    double const R_F = 777900000; // радиус орбиты Юпитера
-    double const V_0 = 29.765; // начальная тангенциальная скорость ракеты км/сек
-    double const U_0 = 0; // начальная радиальная скорость ракеты км/сек
-    double const V_Z = 29.765; // орбитальная скорость Земли км/сек
-    double const V_F = 13.07; // орбитальная скорость Юптера км/сек
-    double const ALPHA = 0.001;  // ускорение от паруса, м/сек**
-    double const t10 = 3650; // суммарное время, нулевое приближение  (в сутках)
-    double const A_0 = 0.0059361; //гравитационная постоянная*Mc/R0**2
-    double const PU_0 = 695;    // сопряженная переменная
-    double const PV_0 = 1383.0;    // сопряженная переменная
-    double const PR_0 = -0.00001; // сопряженная переменная
-    static double t1 = t10;
-    int dimension = 4;  //   количество переменных в методе Ньютона
-    int iterations = 1000;  // !общее количество шагов в Рунге-Кутта
+    extern double const FiZ; // полярный полярный угол Земли
+    extern double const R_0; // радиус орбиты Земли
+    extern double const R_F; // радиус орбиты Юпитера
+    extern double const V_0; // начальная тангенциальная скорость ракеты км/сек
+    extern double const U_0; // начальная радиальная скорость ракеты км/сек
+    extern double const V_Z; // орбитальная скорость Земли км/сек
+    extern double const V_F; // орбитальная скорость Юптера км/сек
+    extern double const ALPHA;  // ускорение от паруса, м/сек**
+    extern double const t10; // суммарное время, нулевое приближение  (в сутках)
+    extern double const A_0; //гравитационная постоянная*Mc/R0**2
+    extern double const PU_0;    // сопряженная переменная
+    extern double const PV_0;    // сопряженная переменная
+    extern double const PR_0; // сопряженная переменная
+    extern double t1;
+    extern int dimension;  //   количество переменных в методе Ньютона
+    extern int iterations;  // !общее количество шагов в Рунге-Кутта
 
-    std::vector<std::vector<double>> result(
-            iterations + 1, std::vector<double>(dimension + 5, 0));
+    extern std::vector<std::vector<double>> result;
 }
 
 #endif //JUPITER_FLIGHT_SIMULATION_CONSTANTS_H

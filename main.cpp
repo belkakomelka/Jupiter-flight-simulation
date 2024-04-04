@@ -1,7 +1,5 @@
-#include <iostream>
-#include <cmath>
 #include "Modyfied_Newton.h"
-#include "subfunction.h"
+#include "Subfunction.h"
 #include "constants.h"
 
 int main() {

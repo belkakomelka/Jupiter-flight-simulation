@@ -89,16 +89,8 @@ void getResidual(const std::vector<double> &x, std::vector<double> &residuals){
 
     RK4(subfunction, constants::dimension, constants::iterations, X0, delX, y, exit_signal, step_counter, constants::result);
 
-//do i=1, N1+1
-//do j=1, N6+1
-//Res1(i,j)=Res(i,j)
-//end do
-//end do
-//
-//F(1)=Y(1)/1.d0
-//F(2)=(Y(2)-VM*1000.d0)/(VM*1000.d0)
-//F(3)=(Y(3)-RM*1000.d0)/(RM*1000.d0)
-//F(4)=Hpontr/1.d0
-//
-//end
+    residuals[0] = y[0];
+    residuals[1] = (y[1] - constants::V_F) / constants::V_F;
+    residuals[2] = (y[2] - constants::R_F) / constants::R_F;
+    residuals[3] = H_PONTRYAGIN;
 }
