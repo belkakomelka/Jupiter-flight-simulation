@@ -4,7 +4,7 @@ void RK4(
     void (*subfunction)(
         int dimension,
         double x0,
-        vector<double> y,
+        const vector<double>& y,
         vector<double>& dy,
         int& exit_signal,
         unsigned int step_number,
@@ -18,8 +18,6 @@ void RK4(
     int& step_counter,
     Matrix& result)
 {
-    std::cout << "RK4_FUNCTION" << std::endl;
-
     step_counter = 0;
     double x = x0;
     exit_signal = 0;
@@ -34,6 +32,8 @@ void RK4(
 
     result[0][0] = x; // относительно время
 
+    std::cout << "RK4_FUNCTION" << std::endl;
+
     for (int i = 0; i < dimension_rk; i++)
         result[0][i + 1] = y[i];
 
@@ -46,6 +46,7 @@ void RK4(
 
     for (int i = 0; i < steps; i++)
 	{
+        std::cout << "i = " << i << std::endl;
         subfunction(dimension_rk, x, y, dy, exit_signal, step_counter, result);
         if (exit_signal == 1)
             break;
@@ -87,17 +88,22 @@ void RK4(
             std::cout << "ak4[" << j << "] = " << ak4[j] << std::endl;
             y[j] += (ak1[j] + 2.0 * ak2[j] + 2.0 * ak3[j] + ak4[j]) / 6.0;
             result[i + 1][j + 1] = y[j];
-//            std::cout << "result_matrix " << result[i+1][j+1] << " ";
+           std::cout << "result_matrix " << result[i+1][j+1] << " ";
         }
+
         std::cout << std::endl;
         x += dx;
         step_counter++;
-    }
-    for (int i = 0; i < constants::iterations; i++){
-        for (int j = 0; j < 12; j++){
-            std::cout << result[i][j] << " ";
-        }
+
         std::cout << std::endl;
+        std::cout << "RESULT" << std::endl;
+        for (int i = 0; i < constants::iterations; i++){
+            for (int j = 0; j < 12; j++){
+                std::cout << result[i][j] << " ";
+            }
+            std::cout << std::endl;
+        }
+
     }
     std::cout << std::endl;
 }

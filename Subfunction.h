@@ -9,7 +9,7 @@
 void subfunction(
         int dimension,
         double x0,
-        std::vector<double> y,
+        const std::vector<double>& y,
         std::vector<double>& dy,
         int& exit_signal,
         unsigned int step_number,

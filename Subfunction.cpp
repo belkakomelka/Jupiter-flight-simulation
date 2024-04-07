@@ -3,7 +3,7 @@
 void subfunction(
         int dimension,
         double x0,
-        std::vector<double> y,
+        const std::vector<double>& y,
         std::vector<double>& dy,
         int& exit_signal,
         unsigned int step_number,
@@ -62,6 +62,7 @@ void subfunction(
     for (int i = 0; i < 9; i++){
         std::cout << dy[i] << " ";
     }
+    std::cout << std::endl;
     // запишем функцию Понтрягина
     double H_PONTRYAGIN = (y[4] * dy[0] + y[5] * dy[1] + y[6] * dy[2] + y[7] * dy[3]) * T - 1;
     std::cout << "H_PONTRYAGIN = " << H_PONTRYAGIN << std::endl;

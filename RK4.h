@@ -9,7 +9,7 @@ void RK4(
         void (*subfunction)(
         int dimension,
         double x0,
-        vector<double> y,
+        const vector<double>& y,
         vector<double>& dy,
         int& exit_signal,
         unsigned int step_number, Matrix& result),
