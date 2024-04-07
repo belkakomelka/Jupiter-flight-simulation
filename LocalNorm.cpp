@@ -1,4 +1,5 @@
 #include "LocalNorm.h"
+#include <cmath>
 
 double getLocalNorm(std::vector<double>& residuals, const Matrix& A){
     double norm = 0;
