@@ -7,7 +7,7 @@
 
 using std::vector;
 
-typedef vector<vector<double>> Matrix;
+typedef vector<vector<double> > Matrix;
 
 void solveSystem(
 	const Matrix& LU, vector<double>& B, 

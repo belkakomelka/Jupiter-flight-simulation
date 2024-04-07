@@ -9,7 +9,7 @@
 using std::vector;
 using std::string;
 
-typedef vector<vector<double>> Matrix;
+typedef vector<vector<double> > Matrix;
 
 void LUP(const Matrix &A, Matrix &LU, vector<int> &T, string& error);
 

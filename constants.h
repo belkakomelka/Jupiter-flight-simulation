@@ -22,7 +22,7 @@ namespace constants{
     extern int dimension;  //   количество переменных в методе Ньютона
     extern int iterations;  // !общее количество шагов в Рунге-Кутта
 
-    extern std::vector<std::vector<double>> result;
+    extern std::vector<std::vector<double> > result;
 }
 
 #endif //JUPITER_FLIGHT_SIMULATION_CONSTANTS_H

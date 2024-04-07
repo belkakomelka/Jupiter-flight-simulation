@@ -20,5 +20,4 @@ add_executable(Jupiter-flight-simulation main.cpp
         Subfunction.cpp
         constants.h
         constants.cpp
-        constants.h
 )

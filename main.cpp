@@ -17,9 +17,14 @@ int main() {
 //    double R = constants::R_0;
 //    double Fi = constants::FiZ;
     // параметры пристрелки
-    vector<double> x{PU / constants::PU_0, PV / constants::PV_0, PR / constants::PR_0, t1 / constants::t10};
+    vector<double> x;
+    //{PU / constants::PU_0, PV / constants::PV_0, PR / constants::PR_0, t1 / constants::t10 };
+    x[0] =  PU / constants::PU_0;
+    x[1] = PV / constants::PV_0;
+    x[2] = PR / constants::PR_0;
+    x[3] = t1 / constants::t10;
     std::cout << "x = ";
-    for (int i = 0; i < x.size(); i++){
+    for (int i = 0; i < 4; i++){
         std::cout << x[i] << " ";
     }
     std::cout << std::endl;
