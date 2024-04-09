@@ -19,15 +19,15 @@ void subfunction(
 
     std::cout << "SUBFUNCTION_FUNCTION" << std::endl;
 // todo домножить
-    double U = y[0];
-    double V = y[1];
-    double R = y[2];
-    double FI = y[3];
-    double PU = y[4]; // todo домножить  на нулевые PU_0
-    double PV = y[5];
-    double PR = y[6];
+    double U = y[0] * constants::U_0;
+    double V = y[1] * constants::V_0;
+    double R = y[2] * constants::R_0;
+    double FI = y[3] * constants::FiZ;
+    double PU = y[4] * constants::PU_0;
+    double PV = y[5] * constants::PV_0;
+    double PR = y[6] * constants::PR_0;
     double PFi = y[7];
-    double T = x0 * 86400;
+    double T = constants::t1 * 86400;
 
     std::cout << "U = " << U << std::endl;
     std::cout << "V = " << V << std::endl;
@@ -57,20 +57,20 @@ void subfunction(
     dy[7] = (PU * (pow(V / R, 2) - 2 * constants::A_0 * pow(constants::R_0, 2) / pow(R,3) + 2 * constants::ALPHA * pow(cos(teta), 3) * pow(constants::R_0, 2) / pow(R,3))
             - PV * (U * V / R + 2 * constants::ALPHA * sin(teta) * pow(cos(teta), 2) * pow(constants::R_0, 2) / pow(R,3))) * T; // dPR/dt
     dy[8] = 0; // dPFi/dt
-
     std::cout << "dy = ";
     for (int i = 0; i < 9; i++){
         std::cout << dy[i] << " ";
     }
     std::cout << std::endl;
     // запишем функцию Понтрягина
-    double H_PONTRYAGIN = (y[4] * dy[0] + y[5] * dy[1] + y[6] * dy[2] + y[7] * dy[3]) * T - 1;
+    double H_PONTRYAGIN = (y[4] * dy[0] + y[5] * dy[1] + y[6] * dy[2] + y[7] * dy[3]) / T - 1;
+// (Y(5)*dY(1)+Y(6)*dY(2)+Y(7)*dY(3)+Y(8)*dY(4))/T-1.d0
     std::cout << "H_PONTRYAGIN = " << H_PONTRYAGIN << std::endl;
 
-    constants::result[step_number + 1][9] = H_PONTRYAGIN; // 10
-    constants::result[step_number + 1][10] = teta; // 11
-    constants::result[step_number + 1][11] = tetagrad; // 12
-    constants::result[step_number + 1][12] = x0 * constants::t1; // 13
+    constants::result[step_number + 1][9] = H_PONTRYAGIN;
+    constants::result[step_number + 1][10] = teta;
+    constants::result[step_number + 1][11] = tetagrad;
+    constants::result[step_number + 1][12] = x0 * constants::t1;
 
     std::cout << std::endl;
 }
@@ -87,27 +87,30 @@ void getResidual(const std::vector<double> &x, std::vector<double> &residuals){
     double PU = x[0] * constants::PU_0;
     double PV = x[1] * constants::PV_0;
     double PR = x[2] * constants::PR_0;
-    double t1 = x[3] * constants::t10;
+    constants::t1 = x[3] * constants::t10;
     double PFi = 0;
 
     std::cout << "PU = " << PU << std::endl;
     std::cout << "PV = " << PV << std::endl;
     std::cout << "PR = " << PR << std::endl;
-    std::cout << "t1 = " << t1 << std::endl;
+    std::cout << "t1 = " << constants::t1 << std::endl;
 
     double teta = atan((3*PU - sqrt(9 * pow(PU, 2) + 8 * pow(PV, 2) )) / 4 / PV);
     double tetagrad= teta * 180 / M_PI;
     std::cout << "teta = " << teta << std::endl;
     std::cout << "tetagrad = " << tetagrad << std::endl;
 
-    double T=t1*86400;
+    double T=constants::t1*86400;
 
     double H_PONTRYAGIN =  PU*(pow(constants::V_0, 2) / constants::R_0 - constants::A_0 + constants::ALPHA * pow(cos(teta),3))
-                           + PV*(-constants::V_0 * constants::U_0/ constants::R_0 - constants::ALPHA * pow(cos(teta),2) * sin(teta))+ PR * constants::U_0 + PFi * (constants::V_0 / constants::R_0)-1;
-
+                           + PV*(-constants::V_0 * constants::U_0/ constants::R_0 - constants::ALPHA * pow(cos(teta),2) * sin(teta))
+                           + PR * constants::U_0 + PFi * (constants::V_0 / constants::R_0) - 1;
+// PU*(V0*V0/R0*1.d3-A0*(R0/R0)**2.+alfa*(R0/R0)**2.*dcos(teta)**3.)+ &
+//  PV*(-V0*U0/R0*1.d3-alfa*(R0/R0)**2.*dcos(teta)**2.*dsin(teta))+  &
+//	  PR*U0*1.d3+ PFi*(V0/R0)-1.d0
     std::cout << "H_PONTRYAGIN = " << H_PONTRYAGIN << std::endl;
 
-    double tabs = X0 * t1;
+    double tabs = X0 * constants::t1;
 
     vector<double> y{constants::U_0, constants::V_0, constants::R_0, constants::FiZ, PU, PV, PR, PFi};
     std::cout << "y = ";
@@ -116,15 +119,17 @@ void getResidual(const std::vector<double> &x, std::vector<double> &residuals){
     }
     std::cout << std::endl;
 
-    constants::result[0][9] = H_PONTRYAGIN;
+    constants::result[0][9] = H_PONTRYAGIN; // todo не сошелся понтрягин
     constants::result[0][10] = teta;
     constants::result[0][11] = tetagrad;
     constants::result[0][12] = tabs;
 
     int exit_signal = 0;
     int step_counter = 0;
+    int parametresNumber = 8;
+    double firstTime = 0;
 
-    RK4(subfunction, y.size(), iterations, X0, delX, y,
+    RK4(subfunction, parametresNumber, iterations, firstTime, delX, y,
         exit_signal, step_counter, constants::result);
 
     residuals.resize(x.size());

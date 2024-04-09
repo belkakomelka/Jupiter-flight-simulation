@@ -37,25 +37,17 @@ void RK4(
     for (int i = 0; i < dimension_rk; i++)
         result[0][i + 1] = y[i];
 
-    std::cout << "result_matrix[0][] = ";
-
-    for (int i = 0; i < dimension_rk; i++)
-        std::cout << result[0][i+1] << " ";
-
     vector<double> dy(dimension_rk, 0);
 
     for (int i = 0; i < steps; i++)
 	{
-        std::cout << "i = " << i << std::endl;
         subfunction(dimension_rk, x, y, dy, exit_signal, step_counter, result);
         if (exit_signal == 1)
             break;
         for (int j = 0; j < dimension_rk; j++)
 		{
             ak1[j] = dx * dy[j];
-            std::cout << "ak1[" << j << "] = " << ak1[j] << std::endl;
             y1[j] = y[j] + ak1[j] / 2.0;
-            std::cout << "y1[" << j << "] = " << y1[j] << std::endl;
         }
 
         double x1 = x + dx / 2.0;
@@ -64,18 +56,14 @@ void RK4(
         for (int j = 0; j < dimension_rk; j++)
 		{
             ak2[j] = dx * dy[j];
-            std::cout << "ak2[" << j << "] = " << ak2[j] << std::endl;
             y1[j] = y[j] + ak2[j] / 2.0;
-            std::cout << "y1[" << j << "] = " << y1[j] << std::endl;
         }
 
         subfunction(dimension_rk, x1, y1, dy, exit_signal, step_counter, result);
         for (int j = 0; j < dimension_rk; j++)
 		{
             ak3[j] = dx * dy[j];
-            std::cout << "ak3[" << j << "] = " << ak3[j] << std::endl;
             y1[j] = y[j] + ak3[j];
-            std::cout << "y1[" << j << "] = " << y1[j] << std::endl;
         }
 
         subfunction(dimension_rk, x + dx, y1, dy, exit_signal, step_counter, result);
@@ -85,10 +73,8 @@ void RK4(
 		for (int j = 0; j < dimension_rk; j++)
 		{
             ak4[j] = dx * dy[j];
-            std::cout << "ak4[" << j << "] = " << ak4[j] << std::endl;
             y[j] += (ak1[j] + 2.0 * ak2[j] + 2.0 * ak3[j] + ak4[j]) / 6.0;
             result[i + 1][j + 1] = y[j];
-           std::cout << "result_matrix " << result[i+1][j+1] << " ";
         }
 
         std::cout << std::endl;
@@ -97,12 +83,10 @@ void RK4(
 
         std::cout << std::endl;
         std::cout << "RESULT" << std::endl;
-        for (int i = 0; i < constants::iterations; i++){
-            for (int j = 0; j < 12; j++){
-                std::cout << result[i][j] << " ";
-            }
-            std::cout << std::endl;
+        for (int j = 0; j < 12; j++){
+            std::cout << result[i][j] << " ";
         }
+        std::cout << std::endl;
 
     }
     std::cout << std::endl;
