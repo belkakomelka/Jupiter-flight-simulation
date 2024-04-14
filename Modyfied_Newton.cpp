@@ -14,7 +14,6 @@ void newtonModyfied(void (*getResidual)(const vector<double> &, vector<double> &
     for (; iteration < max_iterations;){
 		//посчитали невязку (по исходным данным)
         getResidual(x, residuals);
-
         // Проверка сходимости (в первый раз скорее всего 
 		// не пройдёт, вряд ли попали в нужное решение)
         int R1 = 0;

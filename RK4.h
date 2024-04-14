@@ -13,7 +13,7 @@ void RK4(
         vector<double>& dy,
         int& exit_signal,
         unsigned int step_number, Matrix& result),
-        unsigned int dimension_rk, int steps,
+        unsigned int dimension, int steps,
         double x0, double dx, vector<double> y,
         int& exit_signal, int& step_counter, Matrix& result);
 
