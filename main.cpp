@@ -26,7 +26,7 @@ int main() {
     std::cout << std::endl;
     std::vector<double> residuals;
     // todo вывод начальных
-    newtonModyfied(&getResidual, constants::dimension, x, residuals, constants::iterations_rk);
+    newtonModyfied(&getResidual, constants::dimension, x, residuals, constants::iterations);
     // todo вывод результатов
     return 0;
 }
