@@ -53,15 +53,15 @@ void subfunction(
     dy[3] = (V / R) * T; // dFi/dt
     dy[4] = (V / R * PV - PR) * T; // dPU/dt
     dy[5] = (PV * U / R - 2 * V * PU / R -PFi / R) * T; // dPV/dt
-    dy[6] = (PV * U / R-2 * V * PU / R - PFi / R) * T; // dPV/dt
-    dy[7] = (PU * (pow(V / R, 2) - 2 * constants::A_0 * pow(constants::R_0, 2) / pow(R,3) + 2 * constants::ALPHA * pow(cos(teta), 3) * pow(constants::R_0, 2) / pow(R,3))
+    dy[6] = (PU * (pow(V / R, 2) - 2 * constants::A_0 * pow(constants::R_0, 2) / pow(R,3) + 2 * constants::ALPHA * pow(cos(teta), 3) * pow(constants::R_0, 2) / pow(R,3))
             - PV * (U * V / R + 2 * constants::ALPHA * sin(teta) * pow(cos(teta), 2) * pow(constants::R_0, 2) / pow(R,3))) * T; // dPR/dt
-    dy[8] = 0; // dPFi/dt
-    std::cout << "dy = ";
-    for (int i = 0; i < 9; i++){
-        std::cout << dy[i] << " ";
-    }
-    std::cout << std::endl;
+    dy[7] = 0; // dPFi/dt
+
+//    std::cout << "dy = ";
+//    for (int i = 0; i < 8; i++){
+//        std::cout << dy[i] << " ";
+//    }
+//    std::cout << std::endl;
     // запишем функцию Понтрягина
     double H_PONTRYAGIN = (y[4] * dy[0] + y[5] * dy[1] + y[6] * dy[2] + y[7] * dy[3]) / T - 1;
 // (Y(5)*dY(1)+Y(6)*dY(2)+Y(7)*dY(3)+Y(8)*dY(4))/T-1.d0
@@ -76,7 +76,7 @@ void subfunction(
 }
 
 void getResidual(const std::vector<double> &x, std::vector<double> &residuals){
-    int iterations = 1000;
+    double iterations = 1000;
     // x - массив неизвестных
     // residuals - массив невязок
     // vector<double> x{PU / constants::PU_0, PV / constants::PV_0, PR / constants::PR_0, t1 / constants::t10};
@@ -113,11 +113,11 @@ void getResidual(const std::vector<double> &x, std::vector<double> &residuals){
     double tabs = X0 * constants::t1;
 
     vector<double> y{constants::U_0, constants::V_0, constants::R_0, constants::FiZ, PU, PV, PR, PFi};
-    std::cout << "y = ";
-    for (int i = 0; i < y.size(); i++){
-        std::cout << y[i] << " ";
-    }
-    std::cout << std::endl;
+//    std::cout << "y = ";
+//    for (int i = 0; i < y.size(); i++){
+//        std::cout << y[i] << " ";
+//    }
+//    std::cout << std::endl;
 
     constants::result[0][9] = H_PONTRYAGIN; // todo не сошелся понтрягин
     constants::result[0][10] = teta;
