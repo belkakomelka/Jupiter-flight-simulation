@@ -19,11 +19,6 @@ int main() {
     // параметры пристрелки
     vector<double> x{PU / constants::PU_0, PV / constants::PV_0, PR / constants::PR_0, t1 / constants::t10 }; // x = 1 1 1 1
 
-    std::cout << "x = ";
-    for (int i = 0; i < 4; i++){
-        std::cout << x[i] << " ";
-    }
-    std::cout << std::endl;
     std::vector<double> residuals;
     // todo вывод начальных
     newtonModyfied(&getResidual, constants::dimension, x, residuals, constants::iterations);

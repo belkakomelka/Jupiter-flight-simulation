@@ -32,8 +32,6 @@ void RK4(
 
     result[0][0] = x; // относительно время
 
-    std::cout << "RK4_FUNCTION" << std::endl;
-
     for (int i = 0; i < dimension; i++)
         result[0][i + 1] = y[i];
 
@@ -77,17 +75,8 @@ void RK4(
             result[i + 1][j + 1] = y[j];
         }
 
-        std::cout << std::endl;
         x += dx;
         step_counter++;
 
-        std::cout << std::endl;
-        std::cout << "RESULT" << std::endl;
-        for (int j = 0; j < 12; j++){
-            std::cout << result[i][j] << " ";
-        }
-        std::cout << std::endl;
-
     }
-    std::cout << std::endl;
 }
