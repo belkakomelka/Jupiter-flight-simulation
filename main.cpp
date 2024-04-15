@@ -17,7 +17,7 @@ int main() {
 //    double R = constants::R_0;
 //    double Fi = constants::FiZ;
     // параметры пристрелки
-    vector<double> x{PU / constants::PU_0, PV / constants::PV_0, PR / constants::PR_0, t1 / constants::t10 };
+    vector<double> x{PU / constants::PU_0, PV / constants::PV_0, PR / constants::PR_0, t1 / constants::t10 }; // x = 1 1 1 1
 
     std::cout << "x = ";
     for (int i = 0; i < 4; i++){
