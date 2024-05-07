@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "Modyfied_Newton.h"
 #include "Subfunction.h"
 #include "constants.h"
@@ -20,8 +21,15 @@ int main() {
     vector<double> x{PU / constants::PU_0, PV / constants::PV_0, PR / constants::PR_0, t1 / constants::t10 }; // x = 1 1 1 1
 
     std::vector<double> residuals;
-    // todo вывод начальных
+    std::ofstream clean;
+    clean.open("result.csv");
+    clean.close();
+
     newtonModyfied(&getResidual, constants::dimension, x, residuals, constants::iterations);
-    // todo вывод результатов
+
+    std::ofstream fout;
+    fout.open("result.csv", std::ios_base::app);
+    fout << "Newton_iteration: " << constants::iterations;
+    fout.close();
     return 0;
 }

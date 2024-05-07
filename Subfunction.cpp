@@ -1,4 +1,5 @@
 #include "Subfunction.h"
+#include <fstream>
 
 void subfunction(
         int dimension,
@@ -68,10 +69,10 @@ void getResidual(const std::vector<double> &x, std::vector<double> &residuals){
     double PR = x[2] * constants::PR_0;
     constants::t1 = x[3] * constants::t10;
 
-    for (int i = 0; i < 4; i++){
-        std::cout << x[i] << " ";
-    }
-    std::cout << std::endl;
+//    for (int i = 0; i < 4; i++){
+//        std::cout << x[i] << " ";
+//    }
+//    std::cout << std::endl;
 
     double PFi = 0;
 
@@ -104,8 +105,74 @@ void getResidual(const std::vector<double> &x, std::vector<double> &residuals){
     residuals[1] = (constants::result[iteration][2] - constants::V_F) / constants::V_F;
     residuals[2] = (constants::result[iteration][3] - constants::R_F) / constants::R_F;
     residuals[3] = constants::result[iteration][9];
-    for (int i = 0; i < 4; i++){
-        std::cout << residuals[i] << " ";
+
+    std::ofstream fout;
+    fout.open("result.csv", std::ios_base::app);
+    fout << "RK4 result:" << std::endl;
+    fout.setf(std::ios::left);
+    //fout.width(14);
+    fout << "t,";
+   // fout.width(14);
+    fout << "u,";
+   // fout.width(14);
+    fout << "v,";
+   // fout.width(14);
+    fout << "R,";
+   // fout.width(14);
+    fout << "phi,";
+  //  fout.width(14);
+    fout << "psi_u,";
+  //  fout.width(14);
+    fout << "psi_v,";
+  //  fout.width(14);
+    fout << "psi_R,";
+   // fout.width(14);
+    fout << "psi_phi,";
+  //  fout.width(14);
+    fout << "H,";
+  //  fout.width(14);
+    fout << "Teta,";
+   // fout.width(14);
+    fout << "TetaGrad,";
+   // fout.width(14);
+    fout << "t_abs" << '\n';
+    for (int i = 0; i <= iteration; i++)
+    {
+        for (int j = 0; j < 13; j++)
+        {
+//            fout.precision(6);
+//            fout.width(14);
+            fout << constants::result[i][j];
+            if (j != 12){
+                fout << ",";
+            }
+        }
+        fout << '\n';
     }
-    std::cout << std::endl;
+    fout << '\n';
+
+//    fout << "Residuals: " << std::endl;
+//    fout.width(12);
+//    fout << "u";
+//    fout.width(12);
+//    fout << "v";
+//    fout.width(12);
+//    fout << "R";
+//    fout.width(12);
+//    fout << "H";
+//    fout << std::endl;
+//    for (auto residual : residuals)
+//    {
+//        fout.precision(6);
+//        fout.width(12);
+//        fout << residual;
+//    }
+//    fout << std::endl << std::endl;
+//    fout.close();
+
+//
+//    for (int i = 0; i < 4; i++){
+//        std::cout << residuals[i] << " ";
+//    }
+//    std::cout << std::endl;
 }

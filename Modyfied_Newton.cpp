@@ -1,6 +1,7 @@
 #include "Modyfied_Newton.h"
 #include "EuclideanNorm.h"
 #include "LocalNorm.h"
+#include <fstream>
 
 void newtonModyfied(void (*getResidual)(const vector<double> &, vector<double> &),
     unsigned int dimension,
@@ -31,6 +32,7 @@ void newtonModyfied(void (*getResidual)(const vector<double> &, vector<double> &
 
         // Вычисление матрицы Якоби
         Matrix A(dimension, vector<double>(dimension, 0));
+
         vector<double> x_temp = x;
         for (int i = 0; i < dimension; i++) 
 		{
@@ -50,6 +52,12 @@ void newtonModyfied(void (*getResidual)(const vector<double> &, vector<double> &
         // конец вычисления м. Якоби
 
         iteration++;
+
+        std::ofstream fout;
+        fout.open("result.csv", std::ios_base::app);
+        fout << "Конец итерации:" << iteration << std::endl;
+        fout << std::endl << std::endl;
+        fout.close();
 
         // решение СЛАУ
         Matrix LU = A;
