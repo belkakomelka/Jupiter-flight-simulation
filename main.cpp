@@ -22,13 +22,13 @@ int main() {
 
     std::vector<double> residuals;
     std::ofstream clean;
-    clean.open("jup_perigeliy_res.csv");
+    clean.open("jup_afeliy_res.csv");
     clean.close();
 
     newtonModyfied(&getResidual, constants::dimension, x, residuals, constants::iterations);
 
     std::ofstream fout;
-    fout.open("jup_perigeliy_res.csv", std::ios_base::app);
+    fout.open("jup_afeliy_res.csv", std::ios_base::app);
    // fout << "Newton_iteration: " << constants::iterations;
     fout.close();
     return 0;

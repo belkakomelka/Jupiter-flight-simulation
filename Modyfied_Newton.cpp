@@ -53,11 +53,11 @@ void newtonModyfied(void (*getResidual)(const vector<double> &, vector<double> &
 
         iteration++;
 
-        std::ofstream fout;
-        fout.open("jup_perigeliy_res.csv", std::ios_base::app);
-        fout << "Конец итерации:" << iteration << std::endl;
-        fout << std::endl << std::endl;
-        fout.close();
+//        std::ofstream fout;
+//        fout.open("jup_afeliy_res.csv", std::ios_base::app);
+      //  fout << "Конец итерации:" << iteration << std::endl;
+      //  fout << std::endl << std::endl;
+      // fout.close();
 
         // решение СЛАУ
         Matrix LU = A;
