@@ -107,7 +107,7 @@ void getResidual(const std::vector<double> &x, std::vector<double> &residuals){
     residuals[3] = constants::result[iteration][9];
 
     std::ofstream fout;
-    fout.open("result.csv", std::ios_base::app);
+    fout.open("jup_perigeliy_res.csv", std::ios_base::app);
     fout << "RK4 result:" << std::endl;
     fout.setf(std::ios::left);
     //fout.width(14);

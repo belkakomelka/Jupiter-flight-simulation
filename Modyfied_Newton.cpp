@@ -54,7 +54,7 @@ void newtonModyfied(void (*getResidual)(const vector<double> &, vector<double> &
         iteration++;
 
         std::ofstream fout;
-        fout.open("result.csv", std::ios_base::app);
+        fout.open("jup_perigeliy_res.csv", std::ios_base::app);
         fout << "Конец итерации:" << iteration << std::endl;
         fout << std::endl << std::endl;
         fout.close();
